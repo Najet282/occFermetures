@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.occfermetures">
+    <!-- permission pour acceder a internet (requetes http) -->
+    <uses-permission android:name="android.permission.INTERNET" /> <!-- permet a l application, avant d utiliser Internet, d acceder l etat du reseau (wifi ,3g,4g), permet également de verifier si le réseau est connecté ou non -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- permission to save pictures -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.OccFermetures"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".controller.GestionComptesUtilisateurActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.ProjetsClientActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.ModifFicheSousProjetActivity"
+            android:exported="false" />
+        <activity
+            android:name=".controller.NewProjetByProjet"
+            android:exported="false" />
+        <activity
+            android:name=".controller.NewProjetAjoute"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.ModifFicheClientActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.Test"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.SousProjetActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.ProjetsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.NewCategorieActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.OptionsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.ClientsActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.MenuActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.FicheClientActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.GoogleMaps"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.ImgPleinEcran"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.FicheSousProjetActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.NewProjetByClient"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.NewClientActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name=".controller.MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity> <!-- declaration du provider cree dans res->xml->provider_paths.xml -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.occfermetures.provider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/provider_paths" />
+        </provider>
+    </application>
+
+</manifest>

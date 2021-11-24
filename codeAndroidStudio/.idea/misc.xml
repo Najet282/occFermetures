@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/drawable-anydpi/ic_details.xml" value="0.23541666666666666" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/drawable-anydpi/ic_recherche.xml" value="0.301025641025641" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/drawable/ic_fiche_client_background.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/drawable/ic_launcher_background.xml" value="0.301025641025641" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/drawable/ic_projet_client_background.xml" value="0.23072916666666668" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/drawable/rounded_edit_text.xml" value="0.2890625" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/drawable/rounded_layout.xml" value="0.2708333333333333" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/drawable/rounded_layout_red.xml" value="0.3828125" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/drawable/rounded_layout_white.xml" value="0.2890625" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/drawable/rounded_layout_white_bottom.xml" value="0.3828125" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/drawable/rounded_layout_white_menu.xml" value="0.234375" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/drawable/rounded_text_view.xml" value="0.265625" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/drawable/rounded_tv_bottom.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/drawable/rounded_tv_top.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_acces_comptes.xml" value="0.1765625" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_categorie_adapter.xml" value="0.2734375" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_choisir_client.xml" value="0.26458333333333334" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_client_existant.xml" value="0.33070866141732286" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_clients.xml" value="0.25" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_detail_projet.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_fiche_client.xml" value="0.33" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_fiche_projet.xml" value="0.25" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_fiche_sous_projet.xml" value="0.33" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_google_maps.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_img_plein_ecran.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_main.xml" value="0.2682926829268293" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_maps.xml" value="0.2921875" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_menu.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_modif_fiche_client.xml" value="0.33" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_modif_fiche_sous_projet.xml" value="0.33" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_new_categorie.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_new_client.xml" value="0.296875" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_new_project.xml" value="0.21197916666666666" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_new_projet.xml" value="0.3434343434343434" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_new_projet_ajoute.xml" value="0.29270833333333335" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_new_projet_by_client.xml" value="0.33" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_new_projet_by_projet.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_new_utilisateur.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_options.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_projet_client.xml" value="0.203125" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_projets.xml" value="0.25" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_projets_client.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_projets_client_actvity.xml" value="0.27291666666666664" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_sous_projet.xml" value="0.35260416666666666" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/activity_test.xml" value="0.25181159420289856" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/row_categorie.xml" value="0.1" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/row_client.xml" value="0.2658959537572254" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/row_client_projet.xml" value="0.2838541666666667" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/row_img_list_view.xml" value="0.33" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/row_projet.xml" value="0.1" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/row_sous_projet.xml" value="0.26959247648902823" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/layout/row_utilisateur.xml" value="0.20416666666666666" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.23489583333333333" />
+        <entry key="..\:/Users/najet/AndroidStudioProjects/OccFermetures/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.23489583333333333" />
+      </map>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="Android Studio default JDK" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/build/classes" />
+  </component>
+  <component name="ProjectType">
+    <option name="id" value="Android" />
+  </component>
+  <component name="VisualizationToolProject">
+    <option name="state">
+      <ProjectState>
+        <option name="scale" value="0.36666666666666664" />
+      </ProjectState>
+    </option>
+  </component>
+</project>

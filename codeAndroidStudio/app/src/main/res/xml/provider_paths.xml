@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?><!-- permet d acceder a un fichier temporaire puisque les photos ne sont pas enregistrees sur la galerie de l utilisateur-->
+<paths>
+    <external-path
+        name="external_files"
+        path="." />
+</paths>
