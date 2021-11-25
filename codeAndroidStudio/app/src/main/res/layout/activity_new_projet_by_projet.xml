@@ -32,7 +32,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@mipmap/ic_logo" />
+                    android:src="@drawable/logo" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -138,14 +138,16 @@
 
                 <ImageView
                     android:id="@+id/imageView9"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_client" />
+                    android:layout_width="30dp"
+                    android:layout_height="35dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/user" />
 
                 <Spinner
                     android:id="@+id/spinnerUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
                     tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             </LinearLayout>
@@ -161,9 +163,10 @@
 
                 <ImageView
                     android:id="@+id/imageView4"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    app:srcCompat="@mipmap/ic_dossier" />
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/dossier" />
 
                 <EditText
                     android:id="@+id/etNomProjet"
@@ -194,7 +197,7 @@
                     android:id="@+id/imageView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_categorie" />
+                    app:srcCompat="@drawable/categorie" />
 
                 <EditText
                     android:id="@+id/etNomCat"
@@ -215,6 +218,7 @@
                     android:id="@+id/spinnerCat"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#FFFFFF"
                     tools:ignore="TouchTargetSizeCheck,SpeakableTextPresentCheck" />
 
             </LinearLayout>
@@ -232,7 +236,7 @@
                     android:id="@+id/imageView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_dimensions" />
+                    app:srcCompat="@drawable/dimensions" />
 
                 <EditText
                     android:id="@+id/etLongueur"
@@ -264,7 +268,7 @@
                     android:id="@+id/imageView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_dimensions" />
+                    app:srcCompat="@drawable/dimensions" />
 
                 <EditText
                     android:id="@+id/etLargeur"
@@ -297,7 +301,7 @@
                     android:id="@+id/imageView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_details" />
+                    app:srcCompat="@drawable/details" />
 
                 <EditText
                     android:id="@+id/etDetail"

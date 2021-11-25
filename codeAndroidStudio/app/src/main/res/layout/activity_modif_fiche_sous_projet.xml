@@ -32,7 +32,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@mipmap/ic_logo" />
+                    android:src="@drawable/logo" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
                         android:paddingTop="8dp"
                         android:paddingRight="15dp"
                         android:paddingBottom="8dp"
-                        android:text="Je modifie un projet"
+                        android:text="Je modifie les données"
                         android:textColor="#C70016"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -131,7 +131,7 @@
                     android:id="@+id/imageView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_categorie" />
+                    app:srcCompat="@drawable/categorie" />
 
                 <TextView
                     android:id="@+id/tvCat"
@@ -156,7 +156,7 @@
                     android:id="@+id/imageView6"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_dimensions" />
+                    app:srcCompat="@drawable/dimensions" />
 
                 <EditText
                     android:id="@+id/etLongueur"
@@ -184,7 +184,7 @@
                     android:id="@+id/imageView7"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_dimensions" />
+                    app:srcCompat="@drawable/dimensions" />
 
                 <EditText
                     android:id="@+id/etLargeur"
@@ -212,7 +212,7 @@
                     android:id="@+id/imageView8"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_details" />
+                    app:srcCompat="@drawable/details" />
 
                 <EditText
                     android:id="@+id/etDetail"

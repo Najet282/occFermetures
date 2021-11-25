@@ -32,7 +32,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@mipmap/ic_logo" />
+                    android:src="@drawable/logo" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -131,7 +131,7 @@
                     android:id="@+id/imageView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_user" />
+                    app:srcCompat="@drawable/user" />
 
                 <TextView
                     android:id="@+id/tvNom"
@@ -165,7 +165,7 @@
                     android:id="@+id/imageView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_tel" />
+                    app:srcCompat="@drawable/tel" />
 
                 <TextView
                     android:id="@+id/tvTel"
@@ -190,7 +190,7 @@
                     android:id="@+id/imageView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_email" />
+                    app:srcCompat="@drawable/email" />
 
                 <TextView
                     android:id="@+id/tvEmail"
@@ -215,7 +215,7 @@
                     android:id="@+id/imageView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_adresse" />
+                    app:srcCompat="@drawable/adresse" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -275,10 +275,12 @@
 
                 <ImageView
                     android:id="@+id/imageView10"
+                    android:layout_width="70dp"
+                    android:layout_height="60dp"
                     android:onClick="onClickBtProjets"
-                    android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
-                    app:srcCompat="@mipmap/ic_dossier" />
+                    android:scaleType="fitXY"
+                    app:srcCompat="@drawable/dossier"
+                    tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageView
                     android:id="@+id/imageView17"

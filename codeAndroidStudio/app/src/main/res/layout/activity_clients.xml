@@ -32,7 +32,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@mipmap/ic_logo" />
+                    android:src="@drawable/logo" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -88,7 +88,7 @@
                         android:paddingTop="8dp"
                         android:paddingRight="15dp"
                         android:paddingBottom="8dp"
-                        android:text="Liste des clients"
+                        android:text="Nos clients"
                         android:textColor="#C70016"
                         android:textSize="20sp"
                         android:textStyle="bold" />
@@ -128,7 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:onClick="onClickBtSearch"
-            app:srcCompat="@drawable/ic_recherche"
+            app:srcCompat="@drawable/recherche"
             tools:ignore="SpeakableTextPresentCheck,TouchTargetSizeCheck" />
 
         <com.google.android.material.floatingactionbutton.FloatingActionButton

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.occfermetures">
+    package="com.example.occfermetures" >
     <!-- permission pour acceder a internet (requetes http) -->
     <uses-permission android:name="android.permission.INTERNET" /> <!-- permet a l application, avant d utiliser Internet, d acceder l etat du reseau (wifi ,3g,4g), permet également de verifier si le réseau est connecté ou non -->
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" /> <!-- permission to save pictures -->
@@ -15,7 +15,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.OccFermetures"
-        android:usesCleartextTraffic="true">
+        android:usesCleartextTraffic="true" >
+        <!-- declaration de notre classe de demarrage -->
+        <activity
+            android:name=".controller.SplashScreenActivity"
+            android:exported="true" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".controller.MainActivity"
+            android:exported="false"
+            android:screenOrientation="portrait" />
         <activity
             android:name=".controller.GestionComptesUtilisateurActivity"
             android:exported="false" />
@@ -88,20 +102,12 @@
             android:name=".controller.NewClientActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
-        <activity
-            android:name=".controller.MainActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity> <!-- declaration du provider cree dans res->xml->provider_paths.xml -->
+        <!-- declaration du provider cree dans res->xml->provider_paths.xml -->
         <provider
             android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.occfermetures.provider"
             android:exported="false"
-            android:grantUriPermissions="true">
+            android:grantUriPermissions="true" >
             <meta-data
                 android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/provider_paths" />

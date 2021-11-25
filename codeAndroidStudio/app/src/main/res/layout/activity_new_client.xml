@@ -32,7 +32,7 @@
                     android:layout_width="100dp"
                     android:layout_height="100dp"
                     android:scaleType="fitXY"
-                    app:srcCompat="@mipmap/ic_logo" />
+                    android:src="@drawable/logo" />
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -142,7 +142,7 @@
                     android:id="@+id/imageView4"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_user" />
+                    app:srcCompat="@drawable/user" />
 
                 <EditText
                     android:id="@+id/etNom"
@@ -173,7 +173,7 @@
                     android:id="@+id/imageView11"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_user" />
+                    app:srcCompat="@drawable/user" />
 
                 <EditText
                     android:id="@+id/etPrenom"
@@ -204,7 +204,7 @@
                     android:id="@+id/imageView5"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_tel" />
+                    app:srcCompat="@drawable/tel" />
 
                 <EditText
                     android:id="@+id/etTel"
@@ -235,7 +235,7 @@
                     android:id="@+id/imageView13"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_email" />
+                    app:srcCompat="@drawable/email" />
 
                 <EditText
                     android:id="@+id/etEmail"
@@ -266,7 +266,7 @@
                     android:id="@+id/imageView14"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_adresse" />
+                    app:srcCompat="@drawable/adresse" />
 
                 <EditText
                     android:id="@+id/etAdresse"
@@ -297,7 +297,7 @@
                     android:id="@+id/imageView15"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_adresse" />
+                    app:srcCompat="@drawable/adresse" />
 
                 <EditText
                     android:id="@+id/etCp"
@@ -328,7 +328,7 @@
                     android:id="@+id/imageView16"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:srcCompat="@drawable/ic_adresse" />
+                    app:srcCompat="@drawable/adresse" />
 
                 <EditText
                     android:id="@+id/etVille"
