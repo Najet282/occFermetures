@@ -98,7 +98,7 @@ public class WebServices {
     //json attendu :
     //{"login":"test1"}
     @PostMapping("/checkAccesComptes")
-    public void checkAccesComptes(@RequestBody Utilisateur utilisateur) throws Exception {
+    public boolean checkAccesComptes(@RequestBody Utilisateur utilisateur) throws Exception {
         System.out.println("/checkAccesComptes");
         //recupere un utilisateur par le login saisi en param lors de l appel de la requete
         Utilisateur userBdd = utilisateurDao.findByLogin(utilisateur.getLogin());
@@ -106,8 +106,10 @@ public class WebServices {
         if(userBdd==null){
             throw new Exception("Login inconnu");
         }
-        if(userBdd.getIsAdmin()==false){
-            throw new Exception("Accès non autorisé");
+        if(userBdd.getIsAdmin()==true){
+            return true;
+        }else{
+            return false;
         }
     }
 
@@ -460,8 +462,8 @@ public class WebServices {
         if(sousProjet.getLargeur()==null || sousProjet.getLargeur().trim().length()==0){
             throw new Exception(response.getStatus()+"\nAucune largeur saisie");
         }
-        if(sousProjet.getDetail()==null || sousProjet.getDetail().trim().length()==0){
-            throw new Exception(response.getStatus()+"\nAucun détail saisi");
+        if(sousProjet.getLieu()==null || sousProjet.getLieu().trim().length()==0){
+            throw new Exception(response.getStatus()+"\nAucun lieu saisi");
         }
         //si tout est ok on sauvegarde les donnees saisies
         sousProjetDao.save(sousProjet);
@@ -471,7 +473,7 @@ public class WebServices {
     /** MODIFIER UN SOUS PROJET **/
     //http://localhost:8080/modifSousProjet
     //json attendu :
-    //{"idSousProjet":"4", "idCat":"fenetre", "idProjet":87, "longueur":"120", "largeur":"220", "detail":"aucun"}
+    //{"idSousProjet":"4", "idCat":"fenetre", "idProjet":87, "longueur":"120", "largeur":"220", "nom":"a definir"}
     @PostMapping("/modifSousProjet")
     public void modifSousProjet(@RequestBody SousProjet sousProjet, HttpServletResponse response) throws Exception {
         System.out.println("/modifSousProjet");
@@ -482,6 +484,14 @@ public class WebServices {
             throw new Exception("Ce sous-projet n'est pas enregistré");
         } else {//si l'id' existe et qu il correspond a celui retourne dans le json
             //verification de modification entre les donnees enregistrees dans la bdd et les champs recus, pour n'enregistrer que les modifications
+            if(!sousProjetBdd.getLieu().equals(sousProjet.getLieu())){
+                //controle a nouveau que le champ de soit pas vide
+                if(sousProjetBdd.getLieu()==null || sousProjet.getLieu().trim().length()==0){
+                    throw new Exception(response.getStatus()+"\nAucun lieu saisi");
+                }else{
+                    sousProjetDao.updateLieu(sousProjet.getLieu(), sousProjet.getIdSousProjet());
+                }
+            }
             if(!sousProjetBdd.getLongueur().equals(sousProjet.getLongueur())){
                 //controle a nouveau que le champ de soit pas vide
                 if(sousProjetBdd.getLongueur()==null || sousProjet.getLongueur().trim().length()==0){

@@ -94,7 +94,6 @@ public class OptionsActivity extends AppCompatActivity implements CategorieAdapt
             @Override
             public void run() {
                 try {
-                    WSUtils.checkCodeAcces(paramLoginUser);
                     Intent intent = new Intent(OptionsActivity.this, NewCategorieActivity.class);
                     //passage de paramètre à envoyer dans GestionComptesUtilisateurActivity
                     intent.putExtra("sendLoginUser", paramLoginUser);

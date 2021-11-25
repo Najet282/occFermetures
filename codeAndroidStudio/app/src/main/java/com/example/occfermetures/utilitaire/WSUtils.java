@@ -84,15 +84,17 @@ public class WSUtils {
         return user;
     }
 
-    public static String checkCodeAcces(String login) throws Exception {
+    public static boolean checkCodeAcces(String login) throws Exception {
         //on cree un new user avec le parametre qui sera saisi lors de l appel de la methode
         Utilisateur user = new Utilisateur(login);
         //on transforme notre user en json
         String json = myGson.toJson(user);
         //on effectue la requete de parsing
         String myJson = OkHttpUtils.sendPostOkHttpRequest(URL_WS_OCC_FERMETURES_CHECK_ACCES_COMPTES, json);
-        //si l acces est autorise retournera du texte
-        return myJson;
+        //on recupere un json de type boolean
+        boolean bool = myGson.fromJson(myJson, boolean.class);
+        //si l acces est autorise retournera true sinon false
+        return bool;
     }
 
     public static ArrayList<Utilisateur> getAllUsers() throws Exception {
@@ -280,9 +282,9 @@ public class WSUtils {
         return project;
     }
 
-    public static SousProjet createSousProjet(String photo1, String photo2, String photo3, String photo4, String longueur, String largeur, String detail, Long idProjet, Long categorie) throws Exception {
+    public static SousProjet createSousProjet(String lieu, String photo1, String photo2, String photo3, String photo4, String longueur, String largeur, String detail, Long idProjet, Long categorie) throws Exception {
         //on cree un new sous-projet avec les parametres qui seront saisis lors de l appel de la methode
-        SousProjet sousProjet = new SousProjet(photo1, photo2, photo3, photo4, longueur, largeur, detail, idProjet, categorie);
+        SousProjet sousProjet = new SousProjet(lieu, photo1, photo2, photo3, photo4, longueur, largeur, detail, idProjet, categorie);
         //on transforme notre projet en json
         String json = myGson.toJson(sousProjet);
         //on effecue la requete de parsing
@@ -293,9 +295,9 @@ public class WSUtils {
         return project;
     }
 
-    public static void modifSousProjet(Long idSousProjet, String photo1, String photo2, String photo3, String photo4, String longueur, String largeur, String detail, Long idProjet, Long idCat) throws Exception {
+    public static void modifSousProjet(Long idSousProjet, String lieu, String photo1, String photo2, String photo3, String photo4, String longueur, String largeur, String detail, Long idProjet, Long idCat) throws Exception {
         //on cree un new sousProjet avec les parametres qui seront saisis lors de l appel de la methode
-        SousProjet sousProjet = new SousProjet(idSousProjet, photo1, photo2, photo3, photo4, longueur, largeur, detail, idProjet, idCat);
+        SousProjet sousProjet = new SousProjet(idSousProjet, lieu, photo1, photo2, photo3, photo4, longueur, largeur, detail, idProjet, idCat);
         //on transforme notre sousProjet en json
         String json = myGson.toJson(sousProjet);
         //on effecue la requete de parsing

@@ -81,24 +81,7 @@ public class ClientsActivity extends AppCompatActivity implements ClientAdapter.
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                         if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                            filtre = binding.etName.getText().toString();
-                            new Thread() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        //on stocke dans une liste le contenu de la requete qui recupere les clients de la bdd contenant le filtre saisi
-                                        ArrayList<Client> list = WSUtils.getClientsWithFilter(filtre);
-                                        //on vide la liste qui stocke a chaque requete les clients de la bdd
-                                        data.clear();
-                                        //on la remplit avec les nouvelles donnees de la bdd
-                                        data.addAll(list);
-                                        //on actualise le RecyclerView en informant notre adapter que les données ont changées pour ré-afficher la liste en fonction des nouvelles données
-                                        adapter.notifyDataSetChanged();
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }.start();
+                            rechercheWithFilter();
                         }
                         return false;
                     }
@@ -118,6 +101,31 @@ public class ClientsActivity extends AppCompatActivity implements ClientAdapter.
     }
 
     public void onClickBtSearch(View view) {
+        rechercheWithFilter();
+    }
+
+    public void onClickBtAddNewClient(View view) {
+        Intent intent = new Intent(this, NewClientActivity.class);
+        //passage de paramètre à envoyer dans NewClientActivity
+        intent.putExtra("sendLoginUser", paramLoginUser);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onClick(Client client) {
+        Intent intent = new Intent(this, FicheClientActivity.class);
+        //passage de paramètres à envoyer dans FicheClientActivity
+        intent.putExtra("sendIdClient", client.getIdClient());
+        intent.putExtra("sendLoginUser", paramLoginUser);
+        startActivity(intent);
+    }
+
+    //TODO gerer le recyclerview avec plusieurs elements cliquables
+
+    /**********************     METHODES DEPORTEES POUR ALLEGER LE CODE    **************************/
+
+    //utilisee pour faire la recherche avec filtre
+    private void rechercheWithFilter() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -147,22 +155,4 @@ public class ClientsActivity extends AppCompatActivity implements ClientAdapter.
             }
         }.start();
     }
-
-    public void onClickBtAddNewClient(View view) {
-        Intent intent = new Intent(this, NewClientActivity.class);
-        //passage de paramètre à envoyer dans NewClientActivity
-        intent.putExtra("sendLoginUser", paramLoginUser);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onClick(Client client) {
-        Intent intent = new Intent(this, FicheClientActivity.class);
-        //passage de paramètres à envoyer dans FicheClientActivity
-        intent.putExtra("sendIdClient", client.getIdClient());
-        intent.putExtra("sendLoginUser", paramLoginUser);
-        startActivity(intent);
-    }
-
-    //TODO gerer le recyclerview avec plusieurs elements cliquables
 }

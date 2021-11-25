@@ -5,13 +5,13 @@ public class SousProjet {
     /*************************     ATTRIBUTS     ****************************/
 
     private Long idSousProjet;
+    private String lieu;
     private String photo1;
     private String photo2;
     private String photo3;
     private String photo4;
     private String longueur;
     private String largeur;
-    private String option;
     private String detail;
     private Long idProjet;
     private Long idCat;
@@ -30,8 +30,9 @@ public class SousProjet {
         this.idProjet = idProjet;
     }
 
-    public SousProjet(Long idSousProjet, String photo1, String photo2, String photo3, String photo4, String longueur, String largeur, String detail, Long idProjet, Long idCat) {
+    public SousProjet(Long idSousProjet, String lieu, String photo1, String photo2, String photo3, String photo4, String longueur, String largeur, String detail, Long idProjet, Long idCat) {
         this.idSousProjet = idSousProjet;
+        this.lieu = lieu;
         this.photo1 = photo1;
         this.photo2 = photo2;
         this.photo3 = photo3;
@@ -43,7 +44,8 @@ public class SousProjet {
         this.idCat = idCat;
     }
 
-    public SousProjet(String photo1, String photo2, String photo3, String photo4, String longueur, String largeur, String detail, Long idProjet, Long idCat) {
+    public SousProjet(String lieu, String photo1, String photo2, String photo3, String photo4, String longueur, String largeur, String detail, Long idProjet, Long idCat) {
+        this.lieu = lieu;
         this.photo1 = photo1;
         this.photo2 = photo2;
         this.photo3 = photo3;
@@ -63,6 +65,14 @@ public class SousProjet {
 
     public void setIdSousProjet(Long idSousProjet) {
         this.idSousProjet = idSousProjet;
+    }
+
+    public String getLieu() {
+        return lieu;
+    }
+
+    public void setLieu(String lieu) {
+        this.lieu = lieu;
     }
 
     public String getPhoto1() {
@@ -111,14 +121,6 @@ public class SousProjet {
 
     public void setLargeur(String largeur) {
         this.largeur = largeur;
-    }
-
-    public String getOption() {
-        return option;
-    }
-
-    public void setOption(String option) {
-        this.option = option;
     }
 
     public String getDetail() {

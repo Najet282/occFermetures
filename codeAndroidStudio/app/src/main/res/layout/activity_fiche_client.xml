@@ -91,13 +91,12 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:background="@drawable/rounded_text_view"
                         android:paddingLeft="15dp"
                         android:paddingTop="8dp"
                         android:paddingRight="15dp"
                         android:paddingBottom="8dp"
                         android:text="Fiche client"
-                        android:textColor="#C70016"
+                        android:textColor="#FFFFFF"
                         android:textSize="20sp"
                         android:textStyle="bold" />
                 </LinearLayout>
@@ -275,19 +274,19 @@
 
                 <ImageView
                     android:id="@+id/imageView10"
-                    android:layout_width="70dp"
-                    android:layout_height="60dp"
+                    android:layout_width="67dp"
+                    android:layout_height="57dp"
                     android:onClick="onClickBtProjets"
                     android:scaleType="fitXY"
-                    app:srcCompat="@drawable/dossier"
+                    app:srcCompat="@drawable/projets_client"
                     tools:ignore="SpeakableTextPresentCheck" />
 
                 <ImageView
                     android:id="@+id/imageView17"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_marginRight="10dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="20dp"
                     android:onClick="onClickBtModify"
                     android:scaleType="fitXY"
                     app:srcCompat="@mipmap/ic_edit"
@@ -297,7 +296,6 @@
                     android:id="@+id/imageView18"
                     android:layout_width="80dp"
                     android:layout_height="80dp"
-                    android:layout_marginLeft="10dp"
                     android:onClick="onClickBtDelete"
                     android:scaleType="fitXY"
                     app:srcCompat="@mipmap/ic_delete"

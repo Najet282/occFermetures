@@ -27,9 +27,10 @@ public class ModifFicheSousProjetActivity extends AppCompatActivity {
     //composants graphiques
     private ActivityModifFicheSousProjetBinding binding;
     //donnees
+    private int lieuCibleSize;
     private int longueurSize;
     private int largeurSize;
-    private int detailSize;
+    public String lieuCible;
     public String longueur;
     public String largeur;
     public String detail;
@@ -38,6 +39,7 @@ public class ModifFicheSousProjetActivity extends AppCompatActivity {
     public String paramNomProjet;
     public String paramDateProjet;
     public Long paramIdCat;
+    public String paramLieuCible;
     public String paramLongueur;
     public String paramLargeur;
     public String paramDetail;
@@ -66,6 +68,7 @@ public class ModifFicheSousProjetActivity extends AppCompatActivity {
 
         //passage de param que l'on récupère de FicheSousProjetActivity
         String paramNomCat = getIntent().getStringExtra("sendNomCat");
+        paramLieuCible = getIntent().getStringExtra("sendLieuCible");
         paramLongueur = getIntent().getStringExtra("sendLongueur");
         paramLargeur = getIntent().getStringExtra("sendLargeur");
         paramDetail = getIntent().getStringExtra("sendDetail");
@@ -80,6 +83,7 @@ public class ModifFicheSousProjetActivity extends AppCompatActivity {
             @Override
             public void run() {
                 binding.tvCat.setText(paramNomCat);
+                binding.etLieu.setText(paramLieuCible);
                 binding.etLongueur.setText(paramLongueur);
                 binding.etLargeur.setText(paramLargeur);
                 binding.etDetail.setText(paramDetail);
@@ -183,6 +187,7 @@ public class ModifFicheSousProjetActivity extends AppCompatActivity {
         intent.putExtra("sendNomProjet", paramNomProjet);
         intent.putExtra("sendDateProjet", paramDateProjet);
         intent.putExtra("sendIdCat", paramIdCat);
+        intent.putExtra("sendLieuCible", paramLieuCible);
         intent.putExtra("sendLongueur", paramLongueur);
         intent.putExtra("sendLargeur", paramLargeur);
         intent.putExtra("sendDetail", paramDetail);
@@ -287,10 +292,11 @@ public class ModifFicheSousProjetActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //calcul de la taille des champs qui doivent etre saisis avant de valider la modif du sousProjet
+                lieuCibleSize = binding.etLieu.getText().length();
                 longueurSize = binding.etLongueur.getText().length();
                 largeurSize = binding.etLargeur.getText().length();
-                detailSize = binding.etDetail.getText().length();
                 //recuperation des contenus des champs
+                lieuCible = binding.etLieu.getText().toString();
                 longueur = binding.etLongueur.getText().toString();
                 largeur = binding.etLargeur.getText().toString();
                 detail = binding.etDetail.getText().toString();
@@ -302,12 +308,12 @@ public class ModifFicheSousProjetActivity extends AppCompatActivity {
         });
 
         //si tous les champs sont remplis
-        if (longueurSize > 0 && largeurSize > 0 && detailSize > 0) {
+        if (longueurSize > 0 && largeurSize > 0 && lieuCibleSize > 0) {
             new Thread() {
                 @Override
                 public void run() {
                     try {
-                        WSUtils.modifSousProjet(paramIdSousProjet, contenuPhoto1, contenuPhoto2, contenuPhoto3, contenuPhoto4, longueur, largeur, detail, paramIdProjet, paramIdCat);
+                        WSUtils.modifSousProjet(paramIdSousProjet, lieuCible, contenuPhoto1, contenuPhoto2, contenuPhoto3, contenuPhoto4, longueur, largeur, detail, paramIdProjet, paramIdCat);
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -321,6 +327,7 @@ public class ModifFicheSousProjetActivity extends AppCompatActivity {
             intent.putExtra("sendNomProjet", paramNomProjet);
             intent.putExtra("sendDateProjet", paramDateProjet);
             intent.putExtra("sendIdCat", paramIdCat);
+            intent.putExtra("sendLieuCible", lieuCible);
             intent.putExtra("sendLongueur", longueur);
             intent.putExtra("sendLargeur", largeur);
             intent.putExtra("sendDetail", detail);

@@ -7,6 +7,7 @@ import android.view.View;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.occfermetures.databinding.ActivityMenuBinding;
+import com.example.occfermetures.model.Client;
 import com.example.occfermetures.utilitaire.WSUtils;
 
 public class MenuActivity extends AppCompatActivity {
@@ -17,6 +18,7 @@ public class MenuActivity extends AppCompatActivity {
     private ActivityMenuBinding binding;
     //données
     public String paramLoginUser;
+    private boolean acces;
 
     /*****************     PAGE D ACCUEIL DE L ACTIVITE     *****************/
 
@@ -28,6 +30,26 @@ public class MenuActivity extends AppCompatActivity {
 
         //passage de param que l'on récupère de toutes les activites lorsqu on clique sur le bouton d accueil
         paramLoginUser = getIntent().getStringExtra("sendLoginUser");
+
+        //si la personne qui se connecte est responsable elle aura la visibilite des menus options et comptes qui sont stockes dans linearLayoutResponsables que l on rend visible
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    acces = WSUtils.checkCodeAcces(paramLoginUser);
+                    if(acces){
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                binding.linearLayoutResponsables.setVisibility(View.VISIBLE);
+                            }
+                        });
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
 
     }
 
@@ -54,35 +76,11 @@ public class MenuActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickBtComptes(View view){
-        new Thread() {
-            @Override
-            public void run() {
-                try {
-                    WSUtils.checkCodeAcces(paramLoginUser);
-                    Intent intent = new Intent(MenuActivity.this, GestionComptesUtilisateurActivity.class);
-                    //passage de paramètre à envoyer dans GestionComptesUtilisateurActivity
-                    intent.putExtra("sendLoginUser", paramLoginUser);
-                    startActivity(intent);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    showErrorMsg(e.getMessage());
-                }
-            }
-        }.start();
-
+    public void onClickBtComptes(View view) {
+        Intent intent = new Intent(MenuActivity.this, GestionComptesUtilisateurActivity.class);
+        //passage de paramètre à envoyer dans GestionComptesUtilisateurActivity
+        intent.putExtra("sendLoginUser", paramLoginUser);
+        startActivity(intent);
     }
 
-    /**********************     METHODES DEPORTEES POUR ALLEGER LE CODE    **************************/
-
-    //cette methode utilise un runOnUiThread car fait appel a des composants graphiques
-    private void showErrorMsg(String errorMsg) {
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                binding.tvError.setVisibility(View.VISIBLE);
-                binding.tvError.setText(errorMsg);
-            }
-        });
-    }
 }

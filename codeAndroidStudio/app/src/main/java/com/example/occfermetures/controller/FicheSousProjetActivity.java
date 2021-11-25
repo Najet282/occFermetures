@@ -34,6 +34,7 @@ public class FicheSousProjetActivity extends AppCompatActivity implements PhotoA
     public String nomPrenomClient;
     public Long paramIdCat;
     public String nomCatRecup;
+    public String paramLieuCible;
     public String paramLongueur;
     public String paramLargeur;
     public String paramDetail;
@@ -56,6 +57,7 @@ public class FicheSousProjetActivity extends AppCompatActivity implements PhotoA
         paramNomProjet = getIntent().getStringExtra("sendNomProjet");
         paramDateProjet = getIntent().getStringExtra("sendDateProjet");
         paramIdCat = getIntent().getExtras().getLong("sendIdCat");
+        paramLieuCible = getIntent().getStringExtra("sendLieuCible");
         paramLongueur = getIntent().getStringExtra("sendLongueur");
         paramLargeur = getIntent().getStringExtra("sendLargeur");
         paramDetail = getIntent().getStringExtra("sendDetail");
@@ -73,6 +75,7 @@ public class FicheSousProjetActivity extends AppCompatActivity implements PhotoA
                         @Override
                         public void run() {
                             binding.tvCat.setText(nomCatRecup);
+                            binding.tvLieu.setText(paramLieuCible);
                             binding.tvLongueur.setText(paramLongueur);
                             binding.tvLargeur.setText(paramLargeur);
                             binding.tvDetail.setText(paramDetail);
@@ -163,6 +166,7 @@ public class FicheSousProjetActivity extends AppCompatActivity implements PhotoA
         intent.putExtra("sendNomProjet", paramNomProjet);
         intent.putExtra("sendDateProjet", paramDateProjet);
         intent.putExtra("sendIdSousProjet", paramIdSousProjet);
+        intent.putExtra("sendLieuCible", paramLieuCible);
         intent.putExtra("sendLongueur", paramLongueur);
         intent.putExtra("sendLargeur", paramLargeur);
         intent.putExtra("sendDetail", paramDetail);

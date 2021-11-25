@@ -132,6 +132,7 @@ public class SousProjetActivity extends AppCompatActivity implements SousProjetA
         intent.putExtra("sendNomProjet", paramNomProjet);
         intent.putExtra("sendDateProjet", paramDateProjet);
         intent.putExtra("sendIdCat", sousProjet.getIdCat());
+        intent.putExtra("sendLieuCible", sousProjet.getLieu());
         intent.putExtra("sendLongueur", sousProjet.getLongueur());
         intent.putExtra("sendLargeur", sousProjet.getLargeur());
         intent.putExtra("sendDetail", sousProjet.getDetail());

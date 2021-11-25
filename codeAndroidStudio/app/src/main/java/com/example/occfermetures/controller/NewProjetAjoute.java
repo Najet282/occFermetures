@@ -48,9 +48,10 @@ public class NewProjetAjoute extends AppCompatActivity implements AdapterView.On
     private int sizePhoto2;
     private int sizePhoto3;
     private int sizePhoto4;
+    private int sizeLieuCible;
     private int sizeLongueur;
     private int sizeLargeur;
-    private int sizeDetail;
+    private String lieuCible;
     private String longueur;
     private String largeur;
     private String detail;
@@ -158,6 +159,8 @@ public class NewProjetAjoute extends AppCompatActivity implements AdapterView.On
         Intent intent = new Intent(this, SousProjetActivity.class);
         //passage de paramètre à envoyer dans FicheClientActivity
         intent.putExtra("sendIdProjet", paramIdProjet);
+        intent.putExtra("sendNomProjet", paramNomProjet);
+        intent.putExtra("sendDateProjet", paramDateProjet);
         intent.putExtra("sendLoginUser", paramLoginUser);
         startActivity(intent);
     }
@@ -260,7 +263,7 @@ public class NewProjetAjoute extends AppCompatActivity implements AdapterView.On
         recupContenuComposantsGraphiques();
 
         //si tous les champs sont remplis
-        if (sizeNomProjet > 0 && sizeLongueur > 0 && sizeLargeur > 0 && sizeDetail > 0) {
+        if (sizeNomProjet > 0 && sizeLongueur > 0 && sizeLargeur > 0 && sizeLieuCible > 0) {
             //au moins une photo doit etre prise
             if (sizePhoto1 > 0 || sizePhoto2 > 0 || sizePhoto3 > 0 || sizePhoto4 > 0) {
                 new Thread() {
@@ -271,7 +274,7 @@ public class NewProjetAjoute extends AppCompatActivity implements AdapterView.On
                             idCatRecup = WSUtils.getIdCategorieDunSousProjet(resultCat);
 
                             //on enregistre le sous projet
-                            SousProjet ssProj = WSUtils.createSousProjet(contenuPhoto1, contenuPhoto2, contenuPhoto3, contenuPhoto4, longueur, largeur, detail, paramIdProjet, idCatRecup);
+                            SousProjet ssProj = WSUtils.createSousProjet(lieuCible, contenuPhoto1, contenuPhoto2, contenuPhoto3, contenuPhoto4, longueur, largeur, detail, paramIdProjet, idCatRecup);
 
                             //enregistrement de la photo dans la galerie
                             //MediaStore.Images.Media.insertImage(getContentResolver(), imageBitmap, "nomImg", "descriptionImg");
@@ -308,7 +311,7 @@ public class NewProjetAjoute extends AppCompatActivity implements AdapterView.On
         recupContenuComposantsGraphiques();
 
         //si tous les champs sont remplis
-        if (sizeNomProjet > 0 && sizeLongueur > 0 && sizeLargeur > 0 && sizeDetail > 0) {
+        if (sizeNomProjet > 0 && sizeLongueur > 0 && sizeLargeur > 0 && sizeLieuCible > 0) {
             //au moins une photo doit etre prise
             if (sizePhoto1 > 0 || sizePhoto2 > 0 || sizePhoto3 > 0 || sizePhoto4 > 0) {
 
@@ -319,7 +322,7 @@ public class NewProjetAjoute extends AppCompatActivity implements AdapterView.On
                             //je recupere l id de la categorie a l aide du nom selectionne sur le spinner
                             idCatRecup = WSUtils.getIdCategorieDunSousProjet(resultCat);
                             //on enregistre le sous projet
-                            WSUtils.createSousProjet(contenuPhoto1, contenuPhoto2, contenuPhoto3, contenuPhoto4, longueur, largeur, detail, paramIdProjet, idCatRecup);
+                            WSUtils.createSousProjet(lieuCible, contenuPhoto1, contenuPhoto2, contenuPhoto3, contenuPhoto4, longueur, largeur, detail, paramIdProjet, idCatRecup);
 
                             //enregistrement de la photo dans la galerie
                             //MediaStore.Images.Media.insertImage(getContentResolver(), imageBitmap, "nomImg", "descriptionImg");
@@ -388,9 +391,9 @@ public class NewProjetAjoute extends AppCompatActivity implements AdapterView.On
                 sizePhoto2 = binding.etPhoto2.getText().length();
                 sizePhoto3 = binding.etPhoto3.getText().length();
                 sizePhoto4 = binding.etPhoto4.getText().length();
+                sizeLieuCible = binding.etLieu.getText().length();
                 sizeLongueur = binding.etLongueur.getText().length();
                 sizeLargeur = binding.etLargeur.getText().length();
-                sizeDetail = binding.etDetail.getText().length();
                 //on recupere le nom du projet pour l envoyer dans l editText de NewProjet lorsque qu on veut enregistrer plusieurs sous projets pour un meme projet
                 //nomProjetSaisi = binding.tvNomProjet.getText().toString();
                 //on recupere le contenu des champs qui stockent la conversion bitmapToString
@@ -399,6 +402,7 @@ public class NewProjetAjoute extends AppCompatActivity implements AdapterView.On
                 contenuPhoto3 = binding.etPhoto3.getText().toString();
                 contenuPhoto4 = binding.etPhoto4.getText().toString();
                 //on recupere le contenu des autres champ pour la creation d un new projet
+                lieuCible = binding.etLieu.getText().toString();
                 longueur = binding.etLongueur.getText().toString();
                 largeur = binding.etLargeur.getText().toString();
                 detail = binding.etDetail.getText().toString();

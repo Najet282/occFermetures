@@ -45,6 +45,10 @@ public interface SousProjetDao extends JpaRepository<SousProjet, Long> {
 
     //sauvegarde les donnees modifiees d un sousProjet en fonction de son id
     @Modifying
+    @Query("UPDATE SousProjet SET lieu=?1 WHERE idSousProjet=?2")
+    void updateLieu(String lieu, Long idSousProjet);
+
+    @Modifying
     @Query("UPDATE SousProjet SET longueur=?1 WHERE idSousProjet=?2")
     void updateLongueur(String longueur, Long idSousProjet);
 
@@ -55,21 +59,5 @@ public interface SousProjetDao extends JpaRepository<SousProjet, Long> {
     @Modifying
     @Query("UPDATE SousProjet SET detail=?1 WHERE idSousProjet=?2")
     void updateDetail(String detail, Long idSousProjet);
-
-    @Modifying
-    @Query("UPDATE SousProjet SET photo1=?1 WHERE idSousProjet=?2")
-    void updatePhoto1(String photo1, Long idSousProjet);
-
-    @Modifying
-    @Query("UPDATE SousProjet SET photo2=?1 WHERE idSousProjet=?2")
-    void updatePhoto2(String photo2, Long idSousProjet);
-
-    @Modifying
-    @Query("UPDATE SousProjet SET photo3=?1 WHERE idSousProjet=?2")
-    void updatePhoto3(String photo3, Long idSousProjet);
-
-    @Modifying
-    @Query("UPDATE SousProjet SET photo4=?1 WHERE idSousProjet=?2")
-    void updatePhoto4(String photo4, Long idSousProjet);
 
 }

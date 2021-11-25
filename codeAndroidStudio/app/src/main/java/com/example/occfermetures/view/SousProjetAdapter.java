@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.occfermetures.databinding.RowSousProjetBinding;
 import com.example.occfermetures.model.Categorie;
-import com.example.occfermetures.model.Client;
 import com.example.occfermetures.model.SousProjet;
 
 import java.util.ArrayList;
@@ -80,13 +79,13 @@ public class SousProjetAdapter extends RecyclerView.Adapter<SousProjetAdapter.Vi
         //pour eviter un nullPointerException, on verifie qu un attribut obligatoire ne soit pas vide : un sous projet ne peut pas etre sauvegarde si il n y a pas au moins une photo
         if (sousProjet.getPhoto1() != null) {
             //on parcours la liste des categories
-            for(int i = 0; i<dataCategorie.size(); i++){
+            for (int i = 0; i < dataCategorie.size(); i++) {
                 //on prend la categorie au rang i de la liste des categories
                 final Categorie categorie = dataCategorie.get(i);
                 //si l id de la categorie est la meme que l idCat associe au sousProjet, on remplit les champs du client a son projet
-                if(categorie.getIdCat() == idCat) {
+                if (categorie.getIdCat() == idCat) {
                     //on remplit le champ de notre ligne
-                    holder.binding.tvSousProjet.setText(categorie.getNom() + " " + sousProjet.getLongueur() +"cm x " + sousProjet.getLargeur()+"cm");
+                    holder.binding.tvSousProjet.setText(sousProjet.getLieu() + " (" + categorie.getNom() + ")");
                 }
             }
         }

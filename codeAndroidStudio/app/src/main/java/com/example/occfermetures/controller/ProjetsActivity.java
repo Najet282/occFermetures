@@ -95,36 +95,7 @@ public class ProjetsActivity extends AppCompatActivity implements MultiAdapter.O
                     @Override
                     public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                         if ((event != null && (event.getKeyCode() == KeyEvent.KEYCODE_ENTER)) || (actionId == EditorInfo.IME_ACTION_DONE)) {
-                            filtre = binding.etName.getText().toString();
-                            new Thread() {
-                                @Override
-                                public void run() {
-                                    try {
-                                        //on stocke dans une liste le contenu de la requete qui recupere les clients de la bdd contenant le filtre saisi
-                                        ArrayList<Client> listClients = WSUtils.getClientsWithFilter(filtre);
-                                        //on initialise la liste qui recupere les projets des clients filtres
-                                        ArrayList<Projet> listProjets = new ArrayList<>();
-                                        //on parcours la liste des clients filtres
-                                        for (int i = 0; i < listClients.size(); i++) {
-                                            //on recupere les projets des clients filtres
-                                            ArrayList<Projet> listProjetsClient = WSUtils.getAllProjetsClient(listClients.get(i).getIdClient());
-                                            //que l on ajoute a la liste utilisee lors de l affichage du recyclerview
-                                            listProjets.addAll(listProjetsClient);
-                                        }
-
-                                        //on vide la liste qui stocke a chaque requete les clients de la bdd
-                                        dataProjet.clear();
-                                        dataClient.clear();
-                                        //on la remplit avec les nouvelles donnees de la bdd
-                                        dataProjet.addAll(listProjets);
-                                        dataClient.addAll(listClients);
-                                        //on actualise le RecyclerView en informant notre adapter que les données ont changées pour ré-afficher la liste en fonction des nouvelles données
-                                        adapter.notifyDataSetChanged();
-                                    } catch (Exception e) {
-                                        e.printStackTrace();
-                                    }
-                                }
-                            }.start();
+                            rechercheWithFilter();
                         }
                         return false;
                     }
@@ -144,6 +115,32 @@ public class ProjetsActivity extends AppCompatActivity implements MultiAdapter.O
     }
 
     public void onClickBtSearch(View view) {
+        rechercheWithFilter();
+    }
+
+    public void onClickBtAddNewProjet(View view) {
+        Intent intent = new Intent(this, NewProjetByProjet.class);
+        //passage de paramètre à envoyer dans NewProjetByProjet
+        intent.putExtra("sendLoginUser", paramLoginUser);
+        startActivity(intent);
+    }
+
+    @Override
+    public void onClick(Projet projet) {
+        Intent intent = new Intent(this, SousProjetActivity.class);
+        //passage de paramètre à envoyer dans l activite SousProjetActivity
+        intent.putExtra("sendIdProjet", projet.getIdProjet());
+        intent.putExtra("sendNomProjet", projet.getNom());
+        intent.putExtra("sendDateProjet", projet.getDate());
+        intent.putExtra("sendIdClient", projet.getIdClient());
+        intent.putExtra("sendLoginUser", paramLoginUser);
+        startActivity(intent);
+    }
+
+    /**********************     METHODES DEPORTEES POUR ALLEGER LE CODE    **************************/
+
+    //utilisee pour faire la recherche avec filtre
+    private void rechercheWithFilter() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -184,24 +181,5 @@ public class ProjetsActivity extends AppCompatActivity implements MultiAdapter.O
                 }
             }
         }.start();
-    }
-
-    public void onClickBtAddNewProjet(View view) {
-        Intent intent = new Intent(this, NewProjetByProjet.class);
-        //passage de paramètre à envoyer dans NewProjetByProjet
-        intent.putExtra("sendLoginUser", paramLoginUser);
-        startActivity(intent);
-    }
-
-    @Override
-    public void onClick(Projet projet) {
-        Intent intent = new Intent(this, SousProjetActivity.class);
-        //passage de paramètre à envoyer dans l activite SousProjetActivity
-        intent.putExtra("sendIdProjet", projet.getIdProjet());
-        intent.putExtra("sendNomProjet", projet.getNom());
-        intent.putExtra("sendDateProjet", projet.getDate());
-        intent.putExtra("sendIdClient", projet.getIdClient());
-        intent.putExtra("sendLoginUser", paramLoginUser);
-        startActivity(intent);
     }
 }

@@ -146,7 +146,7 @@ public class FicheClientActivity extends AppCompatActivity {
                         }
                     }
                 }.start();
-                Toast.makeText(getApplicationContext(), paramNom + "  " + paramPrenom + " supprimé", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), paramNom + " " + paramPrenom + " supprimé", Toast.LENGTH_SHORT).show();
                 //on retourne sur ClientsActivity
                 Intent intent = new Intent(FicheClientActivity.this, ClientsActivity.class);
                 intent.putExtra("sendLoginUser", paramLoginUser);

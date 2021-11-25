@@ -52,10 +52,11 @@ public class NewProjetByProjet extends AppCompatActivity {
     private int sizePhoto2;
     private int sizePhoto3;
     private int sizePhoto4;
+    private int sizeLieuCible;
     private int sizeLongueur;
     private int sizeLargeur;
-    private int sizeDetail;
     private String nomProjetSaisi;
+    private String lieuCible;
     private String longueur;
     private String largeur;
     private String detail;
@@ -182,6 +183,8 @@ public class NewProjetByProjet extends AppCompatActivity {
     }
 
     public void onClickBtPhoto1(View view) {
+        countClickOnPhoto = 1;
+        onBtPrendrePhoto(view);
         //on rend invisible l image d appareil photos pour etre remplacee par la capture de l image
         runOnUiThread(new Runnable() {
             @Override
@@ -189,11 +192,11 @@ public class NewProjetByProjet extends AppCompatActivity {
                 binding.appareilPhoto1.setVisibility(View.INVISIBLE);
             }
         });
-        countClickOnPhoto = 1;
-        onBtPrendrePhoto(view);
     }
 
     public void onClickBtPhoto2(View view) {
+        countClickOnPhoto = 2;
+        onBtPrendrePhoto(view);
         //on rend invisible l image d appareil photos pour etre remplacee par la capture de l image
         runOnUiThread(new Runnable() {
             @Override
@@ -201,11 +204,11 @@ public class NewProjetByProjet extends AppCompatActivity {
                 binding.appareilPhoto2.setVisibility(View.INVISIBLE);
             }
         });
-        countClickOnPhoto = 2;
-        onBtPrendrePhoto(view);
     }
 
     public void onClickBtPhoto3(View view) {
+        countClickOnPhoto = 3;
+        onBtPrendrePhoto(view);
         //on rend invisible l image d appareil photos pour etre remplacee par la capture de l image
         runOnUiThread(new Runnable() {
             @Override
@@ -213,11 +216,11 @@ public class NewProjetByProjet extends AppCompatActivity {
                 binding.appareilPhoto3.setVisibility(View.INVISIBLE);
             }
         });
-        countClickOnPhoto = 3;
-        onBtPrendrePhoto(view);
     }
 
     public void onClickBtPhoto4(View view) {
+        countClickOnPhoto = 4;
+        onBtPrendrePhoto(view);
         //on rend invisible l image d appareil photos pour etre remplacee par la capture de l image
         runOnUiThread(new Runnable() {
             @Override
@@ -225,8 +228,6 @@ public class NewProjetByProjet extends AppCompatActivity {
                 binding.appareilPhoto4.setVisibility(View.INVISIBLE);
             }
         });
-        countClickOnPhoto = 4;
-        onBtPrendrePhoto(view);
     }
 
 
@@ -281,7 +282,7 @@ public class NewProjetByProjet extends AppCompatActivity {
         recupContenuComposantsGraphiques();
 
         //si tous les champs sont remplis
-        if (sizeNomProjet > 0 && sizeLongueur > 0 && sizeLargeur > 0 && sizeDetail > 0) {
+        if (sizeNomProjet > 0 && sizeLongueur > 0 && sizeLargeur > 0 && sizeLieuCible > 0) {
             //au moins une photo doit etre prise
             if (sizePhoto1 > 0 || sizePhoto2 > 0 || sizePhoto3 > 0 || sizePhoto4 > 0) {
                 new Thread() {
@@ -301,7 +302,7 @@ public class NewProjetByProjet extends AppCompatActivity {
                             idCatRecup = WSUtils.getIdCategorieDunSousProjet(resultCat);
 
                             //on enregistre un sous projet du projet
-                            SousProjet createdSousProjet = WSUtils.createSousProjet(contenuPhoto1, contenuPhoto2, contenuPhoto3, contenuPhoto4, longueur, largeur, detail, idProjetRecup, idCatRecup);
+                            SousProjet createdSousProjet = WSUtils.createSousProjet(lieuCible, contenuPhoto1, contenuPhoto2, contenuPhoto3, contenuPhoto4, longueur, largeur, detail, idProjetRecup, idCatRecup);
 
                             //enregistrement de la photo dans la galerie
                             //MediaStore.Images.Media.insertImage(getContentResolver(), imageBitmap, "nomImg", "descriptionImg");
@@ -337,7 +338,7 @@ public class NewProjetByProjet extends AppCompatActivity {
         recupContenuComposantsGraphiques();
 
         //si tous les champs sont remplis
-        if (sizeNomProjet > 0 && sizeLongueur > 0 && sizeLargeur > 0 && sizeDetail > 0) {
+        if (sizeNomProjet > 0 && sizeLongueur > 0 && sizeLargeur > 0 && sizeLieuCible > 0) {
             //au moins une photo doit etre prise
             if (sizePhoto1 > 0 || sizePhoto2 > 0 || sizePhoto3 > 0 || sizePhoto4 > 0) {
 
@@ -355,7 +356,7 @@ public class NewProjetByProjet extends AppCompatActivity {
                             idCatRecup = WSUtils.getIdCategorieDunSousProjet(resultCat);
 
                             //on enregistre un sous projet du projet que si l on a pas clique sur AJOUTER SOUS PROJET; si on y a clique on gere l enregistrement dans onBtAjouter()
-                            WSUtils.createSousProjet(contenuPhoto1, contenuPhoto2, contenuPhoto3, contenuPhoto4, longueur, largeur, detail, idProjetRecup, idCatRecup);
+                            WSUtils.createSousProjet(lieuCible, contenuPhoto1, contenuPhoto2, contenuPhoto3, contenuPhoto4, longueur, largeur, detail, idProjetRecup, idCatRecup);
 
                             //enregistrement de la photo dans la galerie
                             //MediaStore.Images.Media.insertImage(getContentResolver(), imageBitmap, "nomImg", "descriptionImg");
@@ -456,7 +457,7 @@ public class NewProjetByProjet extends AppCompatActivity {
                 sizePhoto4 = binding.etPhoto4.getText().length();
                 sizeLongueur = binding.etLongueur.getText().length();
                 sizeLargeur = binding.etLargeur.getText().length();
-                sizeDetail = binding.etDetail.getText().length();
+                sizeLieuCible = binding.etLieu.getText().length();
                 //on recupere le nom du projet pour l envoyer dans l editText de NewProjet lorsque qu on veut enregistrer plusieurs sous projets pour un meme projet
                 nomProjetSaisi = binding.etNomProjet.getText().toString();
                 //on recupere le contenu des champs qui stockent la conversion bitmapToString
@@ -465,6 +466,7 @@ public class NewProjetByProjet extends AppCompatActivity {
                 contenuPhoto3 = binding.etPhoto3.getText().toString();
                 contenuPhoto4 = binding.etPhoto4.getText().toString();
                 //on recupere le contenu des autres champ pour la creation d un new projet
+                lieuCible = binding.etLieu.getText().toString();
                 longueur = binding.etLongueur.getText().toString();
                 largeur = binding.etLargeur.getText().toString();
                 detail = binding.etDetail.getText().toString();
