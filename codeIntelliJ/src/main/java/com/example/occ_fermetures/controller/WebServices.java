@@ -3,6 +3,7 @@ package com.example.occ_fermetures.controller;
 import com.example.occ_fermetures.model.beans.*;
 import com.example.occ_fermetures.model.dao.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -48,11 +49,22 @@ public class WebServices {
         System.out.println("/saveUtilisateur");
         //contrôles des donnees saisies avant de les enregistrer
         if(utilisateur.getLogin()==null || utilisateur.getLogin().trim().length()==0){
-            throw new Exception(response.getStatus()+"\nAucun login saisi");
+            throw new Exception(response.getStatus()+" : Aucun login saisi");
         }
         if(utilisateur.getMdp()==null || utilisateur.getMdp().trim().length()==0){
-            throw new Exception(response.getStatus()+"\nAucun mot de passe saisi");
+            throw new Exception(response.getStatus()+" : Aucun mot de passe saisi");
         }
+        //controle si login deja existant
+        Utilisateur userbdd = utilisateurDao.findByLogin(utilisateur.getLogin());
+        if(userbdd!=null){
+            if(userbdd.getLogin().equals(utilisateur.getLogin())){
+                throw new Exception("Ce login est déjà attribué.");
+            }
+        }
+        // Hacher un mot de passe
+        String hashed = BCrypt.hashpw(utilisateur.getMdp(), BCrypt.gensalt());
+        utilisateur.setMdp(hashed);
+        //sauvegarde de l utilisateur avec son mdp hashe
         utilisateurDao.save(utilisateur);
     }
 
@@ -71,7 +83,7 @@ public class WebServices {
         Utilisateur userBdd = utilisateurDao.findByLogin(utilisateur.getLogin());
         //si je ne trouve pas de login -> utilisateur n existe pas
         if(userBdd==null) {
-            throw new Exception("Login incorrect");
+            throw new Exception("Login inconnu");
         }else {//si le login existe et qu il correspond a celui retourne dans le json
             utilisateurDao.delete(userBdd);
         }
@@ -88,7 +100,7 @@ public class WebServices {
         //recupere un utilisateur par le login saisi en param lors de l appel de la requete
         Utilisateur userBdd = utilisateurDao.findByLogin(utilisateur.getLogin());
         if(userBdd==null){
-            throw new Exception("Login incorrect");
+            throw new Exception("Login inconnu");
         }
         return userBdd;
     }
@@ -144,7 +156,8 @@ public class WebServices {
         String mdpBdd = userBdd.getMdp();
         String mdpUser = utilisateur.getMdp();
         //si mdp different de celui en bdd
-        if(!mdpBdd.equals(mdpUser)){
+        // Tester si le mot de passe saisi est identique à celui hashe et stocke en bdd
+        if (!BCrypt.checkpw(mdpUser, mdpBdd)){
             throw new Exception("Mot de passe incorrect");
         }
     }
@@ -152,36 +165,50 @@ public class WebServices {
     /** CREER UN COMPTE CLIENT **/
     //http://localhost:8080/createClient
     //json attendu :
-    //{"nom":"Toto", "prenom":"Toto", "tel":"0123456789", "email":"email@hotmail.fr", "adresse":"adresse1"}
+    //{"nom":"Toto", "prenom":"Toto", "tel":"0561703131", "email":"email@hotmail.fr", "adresse":"adresse1", "cp":"31000", "ville":"TOULOUSE"}
     @PostMapping("/createClient")
-    public Client createClient(@RequestBody Client client, HttpServletResponse response) throws Exception {
+    public Client createClient(@RequestBody Client client) throws Exception {
         System.out.println("/createClient");
         //contrôle des donnees saisies avant de les enregistrer
         if(client.getNom()==null || client.getNom().trim().length()==0){
-            throw new Exception(response.getStatus()+"\nAucun nom saisi");
+            throw new Exception("Aucun nom saisi");
         }
         if(client.getPrenom()==null || client.getPrenom().trim().length()==0){
-            throw new Exception(response.getStatus()+"\nAucun prénom saisi");
+            throw new Exception("Aucun prénom saisi");
         }
         if(client.getTel()==null || client.getTel().trim().length()==0){
-            throw new Exception(response.getStatus()+"\nAucun numéro de téléphone saisi");
+            throw new Exception("Aucun numéro de téléphone saisi");
         }
         if(client.getEmail()==null || client.getEmail().trim().length()==0){
-            throw new Exception(response.getStatus()+"\nAucun email saisi");
+            throw new Exception("Aucun email saisi");
         }
         if(client.getAdresse()==null || client.getAdresse().trim().length()==0){
-            throw new Exception(response.getStatus()+"\nAucune adresse saisie");
+            throw new Exception("Aucune adresse saisie");
         }
         if(client.getCp()==null || client.getCp().trim().length()==0){
-            throw new Exception(response.getStatus()+"\nAucun code postal saisi");
+            throw new Exception("Aucun code postal saisi");
         }
         if(client.getVille()==null || client.getVille().trim().length()==0){
-            throw new Exception(response.getStatus()+"\nAucune ville saisie");
+            throw new Exception("Aucune ville saisie");
+        }
+        if(!isTelephoneValid(client.getTel())){
+            throw new Exception("Format du numéro de téléphone incorrect");
         }
         //retourne boolean; si retourne false format email incorrect
         if(!isEmailAdress(client.getEmail())){
-            throw new Exception(response.getStatus()+"\nFormat de l'email incorrect");
+            throw new Exception("Format de l'email incorrect");
         }
+        if(!isCPValid(client.getCp())){
+            throw new Exception("Format du code postal incorrect");
+        }//pas de controle sur la longueur du nom, prenom, adresse et ville : Mr O existe (secrétaire d'Etat chargé du numérique), la ville Y existe (commune française située dans le département de la Somme, en région Hauts-de-France)
+
+        //recupere un client par l email saisi en param lors de l appel de la requete
+        Client clientBdd = clientDao.findByEmail(client.getEmail());
+        //controle si email client est reconnu par la bdd
+        if(clientBdd!=null) {
+            throw new Exception("L'adresse " + clientBdd.getEmail() + " existe déjà");
+        }
+
         //si tout est ok on sauvegarde les donnees saisies
         clientDao.save(client);
         return client;
@@ -196,20 +223,36 @@ public class WebServices {
         return m.matches();
     }
 
+    /** CHECK SI FORMAT TELEPHONE CLIENT CORRECT **/
+    //methode utilisee pour le controle de l email avant la sauvegarde d un client (ci dessus) et la modif d un client (plus bas)
+    public boolean isTelephoneValid(String tel) {
+        Pattern p = Pattern
+                .compile("^[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+$");
+        Matcher m = p.matcher(tel);
+        return m.matches();
+    }
+
+    /** CHECK SI FORMAT CODE POSTAL CLIENT CORRECT **/
+    //methode utilisee pour le controle de l email avant la sauvegarde d un client (ci dessus) et la modif d un client (plus bas)
+    public boolean isCPValid(String cp) {
+        Pattern p = Pattern
+                .compile("^[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+$");
+        Matcher m = p.matcher(cp);
+        return m.matches();
+    }
+
     /** CHECK SI EMAIL CLIENT DEJA EXISTANT **/
     //http://localhost:8080/checkEmail
     //json attendu :
     //{"email":"email@blablabla"}
     @PostMapping("/checkEmail")
-    public String checkEmail(@RequestBody Client client) throws Exception {
+    public void checkEmail(@RequestBody Client client) throws Exception {
         System.out.println("/checkEmail");
         //recupere un client par l email saisi en param lors de l appel de la requete
         Client clientBdd = clientDao.findByEmail(client.getEmail());
-        //si clientBdd!=null -> client existe deja
+        //controle si email client est reconnu par la bdd
         if(clientBdd!=null){
             throw new Exception("L'adresse " + clientBdd.getEmail() + " existe déjà");
-        }else {
-            return "Email inexistant";
         }
     }
 
@@ -267,31 +310,31 @@ public class WebServices {
             if(!clientBdd.getNom().equals(client.getNom())){
                 //controle a nouveau que le champ de soit pas vide
                 if(client.getNom()==null || client.getNom().trim().length()==0){
-                    throw new Exception(response.getStatus()+"\nAucun nom saisi");
+                    throw new Exception("Code erreur : "+ response.getStatus()+" : Aucun nom saisi");
                 }else{
                     clientDao.updateNom(client.getNom(), clientBdd.getIdClient());
                 }
             }
             if(!clientBdd.getPrenom().equals(client.getPrenom())){
                 if(client.getPrenom()==null || client.getPrenom().trim().length()==0){
-                    throw new Exception(response.getStatus()+"\nAucun prénom saisi");
+                    throw new Exception("Code erreur : "+ response.getStatus()+" : Aucun prénom saisi");
                 }else{
                     clientDao.updatePrenom(client.getPrenom(), clientBdd.getIdClient());
                 }
             }
             if(!clientBdd.getTel().equals(client.getTel())){
                 if(client.getTel()==null || client.getTel().trim().length()==0){
-                    throw new Exception(response.getStatus()+"\nAucun numéro de téléphone saisi");
+                    throw new Exception("Code erreur : "+ response.getStatus()+" : Aucun numéro de téléphone saisi");
                 }else{
                     clientDao.updateTel(client.getTel(), clientBdd.getIdClient());
                 }
             }
             if(!clientBdd.getEmail().equals(client.getEmail())){
                 if(client.getEmail()==null || client.getEmail().trim().length()==0){
-                    throw new Exception(response.getStatus()+"\nAucun email saisi");
+                    throw new Exception("Code erreur : "+ response.getStatus()+" : Aucun email saisi");
                 }//si il le champ email n est pas vide, on verifie son format
                 else if(!isEmailAdress(client.getEmail())){
-                    throw new Exception(response.getStatus()+"\nFormat de l'email incorrect");
+                    throw new Exception("Code erreur : "+ response.getStatus()+" : Format de l'email incorrect");
                 }
                 else{
                     clientDao.updateEmail(client.getEmail(), clientBdd.getIdClient());
@@ -299,21 +342,21 @@ public class WebServices {
             }
             if(!clientBdd.getAdresse().equals(client.getAdresse())){
                 if(client.getAdresse()==null || client.getAdresse().trim().length()==0){
-                    throw new Exception(response.getStatus()+"\nAucune adresse saisie");
+                    throw new Exception("Code erreur : "+ response.getStatus()+" : Aucune adresse saisie");
                 }else{
                     clientDao.updateAdresse(client.getAdresse(), clientBdd.getIdClient());
                 }
             }
             if(!clientBdd.getCp().equals(client.getCp())){
                 if(client.getCp()==null || client.getCp().trim().length()==0){
-                    throw new Exception(response.getStatus()+"\nAucun code postal saisie");
+                    throw new Exception("Code erreur : "+ response.getStatus()+" : Aucun code postal saisie");
                 }else{
                     clientDao.updateCp(client.getCp(), clientBdd.getIdClient());
                 }
             }
             if(!clientBdd.getVille().equals(client.getVille())){
                 if(client.getVille()==null || client.getVille().trim().length()==0){
-                    throw new Exception(response.getStatus()+"\nAucune ville saisie");
+                    throw new Exception("Code erreur : "+ response.getStatus()+" : Aucune ville saisie");
                 }else{
                     clientDao.updateVille(client.getVille(), clientBdd.getIdClient());
                 }

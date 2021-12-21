@@ -23,6 +23,12 @@ public class Utilisateur {
         this.mdp = mdp;
     }
 
+    public Utilisateur(String login, String mdp, Boolean isAdmin) {
+        this.login = login;
+        this.mdp = mdp;
+        this.isAdmin = isAdmin;
+    }
+
     /**********************     GETTERS/SETTERS     *************************/
 
     public Long getIdUser() {

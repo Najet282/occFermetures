@@ -1,7 +1,6 @@
 package com.example.occfermetures.utilitaire;
 
 
-import com.example.occfermetures.model.Error;
 import com.google.gson.Gson;
 
 import okhttp3.MediaType;
@@ -72,6 +71,7 @@ public class OkHttpUtils {
                     throw new Exception(error.getMessage());
                 }
             }
+            throw new Exception("Réponse du serveur incorrect : " + response.code());
         }
         if (response.code() < 200 || response.code() > 299) {
             throw new Exception("Réponse du serveur incorrect : " + response.code());

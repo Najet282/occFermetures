@@ -21,17 +21,17 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ViewHolder
     //objet de type notre interface pour que notre adapter puisse transmettre notre clic
     private OnClientAdapterListener onClientAdapterListener;
 
-    /**************************     5) SETTER     ******************************/
-
-    public void setOnClientAdapterListener(OnClientAdapterListener onClientAdapterListener) {
-        this.onClientAdapterListener = onClientAdapterListener;
-    }
-
     /***********************     4) CONSTRUCTEUR     ***************************/
 
     //creation d un constructeur pour travailler et afficher la liste
     public ClientAdapter(ArrayList<Client> data) {
         this.data = data;
+    }
+
+    /**************************     5) SETTER     ******************************/
+
+    public void setOnClientAdapterListener(OnClientAdapterListener onClientAdapterListener) {
+        this.onClientAdapterListener = onClientAdapterListener;
     }
 
     /***********************     1) INNER CLASS     ***************************/
@@ -96,7 +96,7 @@ public class ClientAdapter extends RecyclerView.Adapter<ClientAdapter.ViewHolder
         return data.size();
     }
 
-    //callback qui premettra de transmettre, à l activite ClientExistant, l’évènement clic sur un client
+    //callback qui premettra de transmettre, a l activity ClentsActivity, l’évènement clic sur un client
     public interface OnClientAdapterListener {
         void onClick(Client client);
     }

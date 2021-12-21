@@ -58,11 +58,95 @@ public class NewClientActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void onClickBtSave(View view) {
+    public void onClickBtRetour(View view) {
+        Intent intent = new Intent(this, ClientsActivity.class);
+        //passage de paramètre à envoyer dans ClientsActivity
+        intent.putExtra("sendLoginUser", paramLoginUser);
+        startActivity(intent);
+    }
 
+    public void onClickBtSave(View view) {
         //on commence par cacher les eventuels precedents msg d erreur
         hideErrorMsg();
 
+        //methode qui stocke la longueur des donnees saisies par l utilisateur et leur contenu
+        recupContenuCompGraph();
+
+        //si tous les champs sont remplis
+        if (nomSize > 0 && prenomSize > 0 && telSize > 0 && emailSize > 0 && adresseSize > 0 && cpSize > 0 && villeSize > 0) {
+            //si le format du numero de tel est correct
+            if (isTelephoneValid(tel)) {
+                //si le format de l email est correct
+                if (isEmailAdress(email)) {
+                    //si le format du code postal est correct
+                    if (isCPValid(cp)) {
+                        new Thread() {
+                            @Override
+                            public void run() {
+                                try {
+                                    //requete qui verifie que le client n est pas deja cree en controlant l existence ou non de l email
+                                    //WSUtils.checkEmail(email);
+                                    //creation du client en le stockant pour reutiliser ses donnees
+                                    Client createdClient = WSUtils.createClient(nom, prenom, tel, email, adresse, cp, ville);
+                                    //redirection vers ProjetClient en utilisant les donnees du client
+                                    Intent intent = new Intent(NewClientActivity.this, FicheClientActivity.class);
+                                    //passage de paramètres à envoyer dans FicheClientActivity
+                                    intent.putExtra("sendIdClient", createdClient.getIdClient());
+                                    intent.putExtra("sendLoginUser", paramLoginUser);
+                                    startActivity(intent);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    showErrorMsg(e.getMessage());
+                                }
+                            }
+                        }.start();
+                    } else {
+                        createDialog("Format du code postal incorrect.");
+                    }
+                } else {
+                    createDialog("Format de l'email incorrect.");
+                }
+            } else {
+                createDialog("Format du numéro de téléphone incorrect.");
+            }
+        } else {
+            createDialog("Veuillez remplir tous les champs.");
+        }
+
+    }
+
+
+    /**********************     METHODES DEPORTEES POUR ALLEGER LE CODE    **************************/
+
+    public boolean isEmailAdress(String email) {
+        Pattern p = Pattern
+                .compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$");
+        Matcher m = p.matcher(email.toUpperCase());
+        return m.matches();
+    }
+
+    public boolean isTelephoneValid(String tel) {
+        Pattern p = Pattern
+                .compile("^[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+$");
+        Matcher m = p.matcher(tel);
+        return m.matches();
+    }
+
+    public boolean isCPValid(String cp) {
+        Pattern p = Pattern
+                .compile("^[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+$");
+        Matcher m = p.matcher(cp);
+        return m.matches();
+    }
+
+    //création d'une popup affichant un message
+    public void createDialog(String text) {
+        AlertDialog ad = new AlertDialog.Builder(this)
+                .setPositiveButton("Ok", null).setMessage(text).create();
+        ad.show();
+    }
+
+    public void recupContenuCompGraph() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -84,73 +168,11 @@ public class NewClientActivity extends AppCompatActivity {
                 ville = binding.etVille.getText().toString();
             }
         });
-
-        //si tous les champs sont remplis
-        if (nomSize > 0 && prenomSize > 0 && telSize > 0 && emailSize > 0 && adresseSize > 0 && cpSize > 0 && villeSize > 0) {
-            //si le format de l email est correct
-            if (isEmailAdress(email)) {
-                new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            //requete qui verifie que le client n est pas deja cree en controlant l existence ou non de l email saisi
-                            //cette requete retournera du texte ("Email inexistant") si l email est inexsistant et levera une exception si l email existe deja
-                            String emailRecup = WSUtils.checkEmail(email);
-                            //si la requete a retourné du texte
-                            if (emailRecup != null) {
-                                //creation du client en le stockant pour reutiliser ses donnees
-                                Client createdClient = WSUtils.createClient(nom, prenom, tel, email, adresse, cp, ville);
-                                //redirection vers ProjetClient en utilisant les donnees du client
-                                Intent intent = new Intent(NewClientActivity.this, FicheClientActivity.class);
-                                //passage de paramètre à envoyer dans FicheClientActivity
-                                intent.putExtra("sendIdClient", createdClient.getIdClient());
-                                intent.putExtra("sendLoginUser", paramLoginUser);
-                                startActivity(intent);
-                            }
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                            showErrorMsg(e.getMessage());
-                        }
-                    }
-                }.start();
-
-
-            } else {
-                createDialog("Format de l'email incorrect.");
-            }
-
-        } else {
-            createDialog("Veuillez remplir tous les champs.");
-        }
-    }
-
-    public void onClickBtRetour(View view) {
-        Intent intent = new Intent(this, ClientsActivity.class);
-        //passage de paramètre à envoyer dans ClientsActivity
-        intent.putExtra("sendLoginUser", paramLoginUser);
-        startActivity(intent);
-    }
-
-
-    /**********************     METHODES DEPORTEES POUR ALLEGER LE CODE    **************************/
-
-    public boolean isEmailAdress(String email) {
-        Pattern p = Pattern
-                .compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,4}$");
-        Matcher m = p.matcher(email.toUpperCase());
-        return m.matches();
-    }
-
-    //création d'une popup affichant un message
-    private void createDialog(String text) {
-        AlertDialog ad = new AlertDialog.Builder(this)
-                .setPositiveButton("Ok", null).setMessage(text).create();
-        ad.show();
     }
 
     //cette methode utilise un runOnUiThread car fait appel a des composants graphiques
     //rend le champ error visible avec le texte saisi en parametre
-    private void showErrorMsg(String errorMsg) {
+    public void showErrorMsg(String errorMsg) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -161,7 +183,7 @@ public class NewClientActivity extends AppCompatActivity {
     }
 
     //rend le champ error invisible
-    private void hideErrorMsg() {
+    public void hideErrorMsg() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

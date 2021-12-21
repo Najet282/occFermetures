@@ -89,7 +89,7 @@
                 android:backgroundTint="#FFFFFF"
                 android:ems="10"
                 android:hint="Mot de passe"
-                android:inputType="textPersonName"
+                android:inputType="textPersonName|textPassword"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"
                 tools:ignore="TouchTargetSizeCheck" />

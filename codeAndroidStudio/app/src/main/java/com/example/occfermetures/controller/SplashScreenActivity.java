@@ -1,10 +1,10 @@
 package com.example.occfermetures.controller;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.occfermetures.R;
 
@@ -27,7 +27,7 @@ public class SplashScreenActivity extends AppCompatActivity {
         };
 
         //creation d un handler post delayed
-        new Handler().postDelayed(runnable, 3000);
+        new Handler().postDelayed(runnable, 2000);
 
     }
 }

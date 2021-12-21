@@ -79,6 +79,10 @@ public class FicheSousProjetActivity extends AppCompatActivity implements PhotoA
                             binding.tvLongueur.setText(paramLongueur);
                             binding.tvLargeur.setText(paramLargeur);
                             binding.tvDetail.setText(paramDetail);
+                            //si aucun detail n est enregistre le champ detail ne s affichera pas sinon on le rend visible
+                            if (binding.tvDetail.getText().length() > 0) {
+                                binding.layoutDetail.setVisibility(View.VISIBLE);
+                            }
                         }
                     });
                 } catch (Exception e) {

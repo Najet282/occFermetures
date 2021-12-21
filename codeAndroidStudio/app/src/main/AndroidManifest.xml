@@ -51,10 +51,6 @@
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".controller.Test"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
             android:name=".controller.SousProjetActivity"
             android:exported="false"
             android:screenOrientation="portrait" />
@@ -80,10 +76,6 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".controller.FicheClientActivity"
-            android:exported="false"
-            android:screenOrientation="portrait" />
-        <activity
-            android:name=".controller.GoogleMaps"
             android:exported="false"
             android:screenOrientation="portrait" />
         <activity

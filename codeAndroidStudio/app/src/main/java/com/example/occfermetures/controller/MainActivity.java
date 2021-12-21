@@ -69,20 +69,12 @@ public class MainActivity extends AppCompatActivity {
     /**********************     METHODES DEPORTEES POUR ALLEGER LE CODE    **************************/
 
     //utilisee pour se connecter lors du clic sur le bouton ou de la touche entree
-    private void seConnecter() {
+    public void seConnecter() {
         //on commence par cacher les eventuels precedents msg d erreur
         hideErrorMsg();
 
-        //calcul de la taille des champs login et mdp qui doivent etre saisis
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                loginSize = binding.etLogin.getText().length();
-                mdpSize = binding.etMdp.getText().length();
-                login = binding.etLogin.getText().toString();
-                mdp = binding.etMdp.getText().toString();
-            }
-        });
+        //methode qui stocke la longueur des donnees saisies par l utilisateur et leur contenu
+        recupContenuCompGraph();
 
         //si tous les champs sont remplis
         if (loginSize > 0 && mdpSize > 0) {
@@ -110,14 +102,27 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //création d'une popup affichant un message
-    private void createDialog(String text) {
+    public void createDialog(String text) {
         AlertDialog ad = new AlertDialog.Builder(this)
                 .setPositiveButton("Ok", null).setMessage(text).create();
         ad.show();
     }
 
+    public void recupContenuCompGraph() {
+        runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                //calcul de la taille des champs qui doivent etre saisis avant de valider la connexion
+                loginSize = binding.etLogin.getText().length();
+                mdpSize = binding.etMdp.getText().length();
+                login = binding.etLogin.getText().toString();
+                mdp = binding.etMdp.getText().toString();
+            }
+        });
+    }
+
     //cette methode utilise un runOnUiThread car fait appel a des composants graphiques
-    private void showErrorMsg(String errorMsg) {
+    public void showErrorMsg(String errorMsg) {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -128,7 +133,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //rend le champ error invisible
-    private void hideErrorMsg() {
+    public void hideErrorMsg() {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {

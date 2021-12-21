@@ -17,8 +17,8 @@ public class MenuActivity extends AppCompatActivity {
     //composants graphiques
     private ActivityMenuBinding binding;
     //données
-    public String paramLoginUser;
     private boolean acces;
+    public String paramLoginUser;
 
     /*****************     PAGE D ACCUEIL DE L ACTIVITE     *****************/
 

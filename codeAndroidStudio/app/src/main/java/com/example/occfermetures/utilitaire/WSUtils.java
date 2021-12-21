@@ -127,21 +127,18 @@ public class WSUtils {
         //on effecue la requete de parsing
         String myJson = OkHttpUtils.sendPostOkHttpRequest(URL_WS_OCC_FERMETURES_CREATE_CLIENT, json);
         //on recupere un json de type Client
-        Client customer = myGson.fromJson(myJson, Client.class);
+        Client clientInJson = myGson.fromJson(myJson, Client.class);
         //on retourne ce json
-        return customer;
+        return clientInJson;
     }
 
-    public static String checkEmail(String email) throws Exception {
+    public static void checkEmail(String email) throws Exception {
         //on cree un new client avec le parametre qui sera saisi lors de l appel de la methode
         Client client = new Client(email);
-        //on transforme notre user en json
+        //on transforme notre client en json
         String json = myGson.toJson(client);
         //on effectue la requete de parsing
-        String myJson = OkHttpUtils.sendPostOkHttpRequest(URL_WS_OCC_FERMETURES_CHECK_EMAIL, json);
-        //si le json retourne du texte c'est que l email saisi n existe pas encore et sera accepte pour enregistrer un nouveau client
-        //si il ne retourne pas du texte c est que la requete a leve une exception car l email saisi existe deja et donc que le client est deja enregistre
-        return myJson;
+        OkHttpUtils.sendPostOkHttpRequest(URL_WS_OCC_FERMETURES_CHECK_EMAIL, json);
     }
 
     public static ArrayList<Client> getAllClients() throws Exception {
