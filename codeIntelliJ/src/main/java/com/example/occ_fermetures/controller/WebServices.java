@@ -31,11 +31,12 @@ public class WebServices {
     @Autowired
     private SousProjetDao sousProjetDao;
 
-    //http://localhost:8080/test
-    @GetMapping("/test")
-    public String test(){
-        System.out.println("/test");
-        return "Connection ok";
+    /** SERVEUR OUVERT **/
+    //http://localhost:8080/testServeur
+    @GetMapping("/testServeur")
+    public String testServeur(){
+        System.out.println("/serveur Ok");
+        return "Connexion ok";
     }
 
     /*************************     RESPONSABLES     ****************************/
@@ -204,15 +205,17 @@ public class WebServices {
 
         //recupere un client par l email saisi en param lors de l appel de la requete
         Client clientBdd = clientDao.findByEmail(client.getEmail());
-        //controle si email client est reconnu par la bdd
-        if(clientBdd!=null) {
+        if(clientBdd==null){
+            clientDao.save(client);
+        }else{
+            //controle si email client est reconnu par la bdd
+            //if (client.getEmail().equals(clientBdd.getEmail())) {
             throw new Exception("L'adresse " + clientBdd.getEmail() + " existe déjà");
         }
 
-        //si tout est ok on sauvegarde les donnees saisies
-        clientDao.save(client);
         return client;
     }
+
 
     /** CHECK SI FORMAT EMAIL CLIENT CORRECT **/
     //methode utilisee pour le controle de l email avant la sauvegarde d un client (ci dessus) et la modif d un client (plus bas)
@@ -252,8 +255,11 @@ public class WebServices {
         Client clientBdd = clientDao.findByEmail(client.getEmail());
         //controle si email client est reconnu par la bdd
         if(clientBdd!=null){
+            //controle si email client est reconnu par la bdd
+            //if (client.getEmail().equals(clientBdd.getEmail())) {
             throw new Exception("L'adresse " + clientBdd.getEmail() + " existe déjà");
         }
+
     }
 
     /** RECUPERER LA LISTE DE TOUS LES CLIENTS **/

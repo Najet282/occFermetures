@@ -11,7 +11,4 @@ public interface UtilisateurDao extends JpaRepository<Utilisateur, Long> {
     //retourne un utilisateur par son login
     Utilisateur findByLogin(String login);
 
-    Utilisateur findByIdUser(Long id);
-    //retourne l utilisateur supprime par son login
-    Utilisateur deleteByLogin(String login);
 }

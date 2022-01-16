@@ -3,6 +3,7 @@ package com.example.occfermetures.controller;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.view.inputmethod.EditorInfo;
@@ -41,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
-        //permet d activer la recherche de nom avec filtre avec la touche entree du clavier
+        //permet d activer la recherche de nom avec filtre par la touche entree du clavier
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -57,6 +58,18 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        //Thread secondaire qui lance les requetes
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    WSUtils.testServeur();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    showErrorMsg("Problème d'accès au serveur");
+                }
+            }
+        }.start();
     }
 
     /*****************     REDIRECTIONS CLIC SUR BOUTON    ******************/
@@ -84,10 +97,10 @@ public class MainActivity extends AppCompatActivity {
                     try {
                         //on execute la requete qui controle les identifiants saisis
                         WSUtils.checkLogin(login, mdp);
-                        Utilisateur utilisateur = WSUtils.getInfosUtilisateur(login);
+                        //Utilisateur utilisateur = WSUtils.getInfosUtilisateur(login);
                         Intent intent = new Intent(MainActivity.this, MenuActivity.class);
                         //passage de paramètre à envoyer dans MenuActivity et qui sera utilise tout le long de l utilisation de l appli pour autoriser ou non l acces a certaines fonctionnalites
-                        intent.putExtra("sendLoginUser", utilisateur.getLogin());
+                        intent.putExtra("sendLoginUser", login);
                         startActivity(intent);
                     } catch (Exception e) {
                         e.printStackTrace();

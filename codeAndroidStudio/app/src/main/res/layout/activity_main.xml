@@ -60,6 +60,7 @@
                 android:ems="10"
                 android:hint="Nom d'utilisateur"
                 android:inputType="textPersonName"
+                android:text="najet"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"
                 tools:ignore="TouchTargetSizeCheck" />
@@ -90,6 +91,7 @@
                 android:ems="10"
                 android:hint="Mot de passe"
                 android:inputType="textPersonName|textPassword"
+                android:text="mdp@OF31"
                 android:textColor="#FFFFFF"
                 android:textColorHint="#FFFFFF"
                 tools:ignore="TouchTargetSizeCheck" />

@@ -18,6 +18,7 @@ public class WSUtils {
 
     private final static Gson myGson = new Gson();
 
+    private final static String URL_WS_OCC_FERMETURES_TEST_SERVEUR = "http://10.0.2.2:8080/testServeur";
     private final static String URL_WS_OCC_FERMETURES_SAVE_USER = "http://10.0.2.2:8080/saveUtilisateur";
     private final static String URL_WS_OCC_FERMETURES_DELETE_USER = "http://10.0.2.2:8080/deleteUtilisateur";
     private final static String URL_WS_OCC_FERMETURES_GET_INFOS_UTILISATEUR = "http://10.0.2.2:8080/getInfosUtilisateur";
@@ -52,6 +53,10 @@ public class WSUtils {
 
 
     /*************************     METHODES     ****************************/
+
+    public static void testServeur() throws Exception {
+        OkHttpUtils.sendCetOkHttpRequest(URL_WS_OCC_FERMETURES_TEST_SERVEUR);
+    }
 
     public static void createUser(String login, String mdp) throws Exception {
         //on cree un new user avec les parametres qui seront saisis lors de l appel de la methode
@@ -113,7 +118,7 @@ public class WSUtils {
     public static void checkLogin(String login, String mdp) throws Exception {
         //on cree un new user avec les parametres qui seront saisis lors de l appel de la methode
         Utilisateur utilisateur = new Utilisateur(login, mdp);
-        //on transforme notre user en json
+        //on transforme notre utilisateur en json
         String json = myGson.toJson(utilisateur);
         //on effectue la requete de parsing
         OkHttpUtils.sendPostOkHttpRequest(URL_WS_OCC_FERMETURES_CHECK_LOGIN, json);

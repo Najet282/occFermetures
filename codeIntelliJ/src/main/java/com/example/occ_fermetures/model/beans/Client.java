@@ -23,7 +23,7 @@ public class Client {
     //mappedBy : nom de l attribut referencant cette classe dans la classe Projet
     //fetch : chargement à la demande (LAZY) ou en même temps que l'objet (EAGER)
     @OneToMany(mappedBy = "idClient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Projet> Projets;
+    private List<Projet> projets;
 
     /***********************     CONSTRUCTEUR     ***************************/
 

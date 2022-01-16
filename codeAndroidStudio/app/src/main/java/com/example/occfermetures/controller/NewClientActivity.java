@@ -3,6 +3,7 @@ package com.example.occfermetures.controller;
 import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Patterns;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -47,6 +48,18 @@ public class NewClientActivity extends AppCompatActivity {
 
         //passage de param que l'on récupère de ClientsActivity
         paramLoginUser = getIntent().getStringExtra("sendLoginUser");
+        //Thread secondaire qui lance les requetes
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    WSUtils.testServeur();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    showErrorMsg("Problème d'accès au serveur");
+                }
+            }
+        }.start();
     }
 
     /*****************     REDIRECTIONS CLIC SUR BOUTON    ******************/
@@ -76,7 +89,7 @@ public class NewClientActivity extends AppCompatActivity {
         if (nomSize > 0 && prenomSize > 0 && telSize > 0 && emailSize > 0 && adresseSize > 0 && cpSize > 0 && villeSize > 0) {
             //si le format du numero de tel est correct
             if (isTelephoneValid(tel)) {
-                //si le format de l email est correct
+                //si le format de l email est correct : Patterns.EMAIL_ADDRESS.matcher(email).matches()
                 if (isEmailAdress(email)) {
                     //si le format du code postal est correct
                     if (isCPValid(cp)) {
@@ -84,7 +97,6 @@ public class NewClientActivity extends AppCompatActivity {
                             @Override
                             public void run() {
                                 try {
-                                    //requete qui verifie que le client n est pas deja cree en controlant l existence ou non de l email
                                     //WSUtils.checkEmail(email);
                                     //creation du client en le stockant pour reutiliser ses donnees
                                     Client createdClient = WSUtils.createClient(nom, prenom, tel, email, adresse, cp, ville);
@@ -112,7 +124,6 @@ public class NewClientActivity extends AppCompatActivity {
         } else {
             createDialog("Veuillez remplir tous les champs.");
         }
-
     }
 
 
@@ -127,14 +138,14 @@ public class NewClientActivity extends AppCompatActivity {
 
     public boolean isTelephoneValid(String tel) {
         Pattern p = Pattern
-                .compile("^[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+$");
+                .compile("^[0-9]{10}+$");
         Matcher m = p.matcher(tel);
         return m.matches();
     }
 
     public boolean isCPValid(String cp) {
         Pattern p = Pattern
-                .compile("^[0-9]+[0-9]+[0-9]+[0-9]+[0-9]+$");
+                .compile("^[0-9]{5}+$");
         Matcher m = p.matcher(cp);
         return m.matches();
     }

@@ -17,10 +17,10 @@ public interface CategorieDao extends JpaRepository<Categorie, Long> {
     @Query("SELECT nom FROM Categorie")
     ArrayList<String> findNomCat();
 
-    //retourne le nom de la categorie
+    //retourne le nom d une categorie par son id
     @Query("SELECT nom FROM Categorie WHERE idCat=?1")
     String findNomByIdCat(Long idCat);
 
-    //retourne l id de la categorie
+    //retourne une par son nom
     Categorie findAllByNom(String nom);
 }

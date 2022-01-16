@@ -24,7 +24,10 @@ public class Projet {
     @OneToMany(mappedBy = "idProjet", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<SousProjet> sousProjets;
     @ManyToOne(fetch = FetchType.LAZY)
+    //@Transcient indique qu un attribut ne doit pas etre persistant:
+    // cad que cet attribut ne sera donc jamais pris en compte lors de l exécution des requetes vers la base de donnees.
     @Transient
+    //name est le nom de la cle etrangere dans la table projet et referencedColumnName est le nom de la cle primaire dans la table client
     @JoinColumn(name = "id_client", referencedColumnName = "idClient")
     private Client client;
 

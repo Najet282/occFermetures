@@ -25,10 +25,10 @@ public class SousProjet {
     //fetch : chargement à la demande (LAZY) ou en même temps que l'objet (EAGER)
     //@JsonIgnore permet de resoudre le msg d erreur : cannot call senderror() after the response has been committed
     @ManyToOne(fetch = FetchType.LAZY)
-    //name est le nom de la cle etrangere dans la table sous projet et referencedColumnName est le nom de la cle primaire dans la table categorie
     //@Transcient indique qu un attribut ne doit pas etre persistant:
     // cad que cet attribut ne sera donc jamais pris en compte lors de l exécution des requetes vers la base de donnees.
     @Transient
+    //name est le nom de la cle etrangere dans la table sous projet et referencedColumnName est le nom de la cle primaire dans la table categorie
     @JoinColumn(name = "id_cat", referencedColumnName = "idCat")
     private Categorie categorie;
     @ManyToOne(fetch = FetchType.LAZY)

@@ -14,6 +14,7 @@ public interface ProjetDao extends JpaRepository<Projet, Long> {
 
     //retourne un projet par son id pour utiliser ses infos
     Projet findByIdProjet(Long idProjet);
+
     //retourne la liste des projets d un client
     List<Projet> findByIdClient(Long idClient);
 
